@@ -1,6 +1,26 @@
+require_relative "pieces"
+
 class Board
+
+  def self.set_pieces(grid)
+
+    piece = Piece.new
+
+    piece_rows = [0,1,6,7]
+
+    grid.each.with_index do |row, i|
+      if piece_rows.include?(i) 
+        row.map.with_index {|square, j| square = Piece.new([i,j])}
+      else
+        row.map {|square| square = NullPiece.new}
+      end
+    end
+
+  end
+
   def initialize
     @rows = Array.new(8) { Array.new(8) }
+
   end
 
 
@@ -18,7 +38,7 @@ class Board
     # check iis it a valid move
      # move piece on that position
     # else WE DON't KNOW YET
-    if 
+    
   end
 
   # That's for future
