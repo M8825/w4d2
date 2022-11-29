@@ -1,4 +1,5 @@
 require_relative 'employee'
+require "debug"
 
 class Manager < Employee
 
@@ -15,12 +16,12 @@ class Manager < Employee
   def bonus(multiplier)
     all_employees = [] # Object emplyee
     @employees.each do |employee|
-      if employee.is_a?(Manager)
-        all_employees += employee.employees
-      end
-    end
 
-    all_employees.inject(self.salary) { |sum, employee| sum + employee.salary } * multiplier
+      all_employees += employee.employees if employee.is_a?(Manager)
+      all_employees << employee
+
+    end
+    all_employees.inject(0) { |sum, employee| sum + employee.salary } * multiplier
   end
 
 end
