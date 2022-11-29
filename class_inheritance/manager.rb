@@ -26,15 +26,9 @@ class Manager < Employee
 
 end
 
-ned = Manager.new("Ned", "kitchen", 1000000)
+ned = Employee.new('Ded', 'kitchen', 5, 'Daren')
+daren = Manager.new('Daren', 'kitchen', 10, 'Fred')
+david = Employee.new('David', 'kitchen', 5, 'Daren')
 
-darren = Manager.new('Daren', 'kitchen', 78000, ned)
-shawna = Employee.new('shawna', 'kitchen', 12000, darren)
-david = Employee.new('David', 'kitchen', 10000, darren)
-
-
-# 22 000 + 78000
-
-p ned.bonus(5) # => 500_000
-p darren.bonus(4) # => 88_000
-p david.bonus(3) # => 30_000
+daren.add_employee(ned)
+daren.add_employee(david)
