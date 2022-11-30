@@ -9,10 +9,8 @@ class Employee
     boss.employees << self if !boss.nil?
   end
 
+
   def bonus(multiplier)
-    bonus = @salary * multiplier
-    bonus
+    @salary * multiplier
   end
 end
-
-
