@@ -1,18 +1,16 @@
-require_relative "pieces"
+require_relative "piece"
+require_relative 'null_piece'
 
 class Board
 
   def self.set_pieces(grid)
-
-    piece = Piece.new
-
     piece_rows = [0,1,6,7]
 
     grid.each.with_index do |row, i|
       if piece_rows.include?(i) 
-        row.map.with_index {|square, j| square = Piece.new([i,j])}
+        grid[i] = row.map.with_index {|square, j| square = Piece.new([i,j]) }
       else
-        row.map {|square| square = NullPiece.new}
+        grid[i] = row.map.with_index {|square, j| square = NullPiece.new([i, j]) }
       end
     end
 
@@ -20,7 +18,7 @@ class Board
 
   def initialize
     @rows = Array.new(8) { Array.new(8) }
-
+    Board.set_pieces(@rows)
   end
 
 
@@ -35,10 +33,15 @@ class Board
   end
 
   def move_piece(start_pos, end_pos)
-    # check iis it a valid move
-     # move piece on that position
-    # else WE DON't KNOW YET
-    
+    if self[start_pos].is_a?(NullPiece)
+      raise "Start position position has no piece"
+    end
+
+    row, col = end_pos
+    # One of the cases, but we know that it will change in the future
+    if row < 0 || row > 7 || col < 0 || col > 7
+      raise "End position invalid"
+    end
   end
 
   # That's for future
