@@ -6,4 +6,8 @@ class Piece
     @pos = pos
   end
 
+  def inspect
+    @pos
+  end
+
 end
